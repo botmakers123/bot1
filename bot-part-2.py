@@ -37,4 +37,4 @@ async def getmcplayer(ctx, arg):
 
 
 
-bot.run('NjkxMTE5NjcxMDAwMzAxNTk4.XqUxOQ.Lk0vT1f2EL7SEX_TI8TJ-xDwNlg')
+bot.run('TOKEN')

@@ -6,7 +6,7 @@ from discord.utils import get
 import requests
 import json
 
-bot = commands.Bot(command_prefix="t-")
+bot = commands.Bot(command_prefix="bot-")
 
 @bot.event
 async def on_ready():
@@ -24,17 +24,17 @@ async def admit(ctx, user: discord.Member, role: discord.Role):
     print ("thing 2")
 
 @bot.command(name='get-mcplayer')
-async def getmcplayer(ctx, arg):
+async def getmcplayer(message, arg):
+    import requests
     r = requests.get("https://playerdb.co/api/player/minecraft/" + arg)
-    jsonData = open("playerdata", 'w')
-    jsonData.write(r.text)
-    jsonData.close()
     f = r.text
     a = json.loads(f)
     usrname = 'Username: ' + str(a['data']['player']['username'])
-    embed2send = discord.Embed(name=usrname, )
-    await ctx.send(embed2send)
-
+    uuid = str(a['data']['player']['raw_id'])
+    pic = "https://crafatar.com/renders/body/" + uuid
+    skindl = "https://crafatar.com/skins/" + uuid
+    await message.channel.send(usrname + " Skin render: " + pic)
+    await message.channel.send("Skin download: " + skindl)
 
 
 bot.run('TOKEN')

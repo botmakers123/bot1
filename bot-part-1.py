@@ -1,8 +1,7 @@
-
 import discord
-import readline
 import time
 import math
+import discord.ext
 
 client = discord.Client()
 
@@ -66,14 +65,14 @@ async def on_message(message):
         print("Handled request")
 
     if message.content.startswith('bot-help'):
-        await message.channel.send('**If you see ANYTHING wrong with this bot, use :contact to ping me (with a message on the end) I like it when people send me even messages like *the audio failed* and attach the logs. I\'ll put a support server link here.** https://discord.gg/ZZUzRET')
+        await message.channel.send('**If you see ANYTHING wrong with this bot, use bot-contact to ping me (with a message on the end) I like it when people send me even messages like *the audio failed* and attach the logs. I\'ll put a support server link here.** https://discord.gg/ZZUzRET')
         print("Handled request")
 
     if message.content.startswith('bot-lfg'):
         msgauth = str(message.author.id)
         msgauth = '<@'+ msgauth +'>'
-        mesgtosend = "Hey @here , " + msgauth + " wants to play a game of...".format(client)
-        await message.channel.send(mesgtosend)
+        mesgtosend = "Hey @here , " + msgauth + " wants to play a game of..."
+        await message.channel.send(mesgtosend.format(client))
 
     if message.content.startswith('bot-lfg-mc'):
         import time
@@ -139,5 +138,6 @@ async def on_message(message):
         import time
         time.sleep(0.6)
         await message.channel.send('Tetris on https://tetr.io !')
+    
 
-client.run(TOKEN)
+client.run('TOKEN')
